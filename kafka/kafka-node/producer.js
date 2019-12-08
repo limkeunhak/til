@@ -1,20 +1,25 @@
-var kafka = require('kafka-node'),
+var kafka = require("kafka-node"),
     Producer = kafka.Producer,
-    KeyedMessage = kafka.KeyedMessage,
-    client = new kafka.KafkaClient({kafkaHost: '127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094'}),
-    producer = new Producer(client),
-    km = new KeyedMessage('key', 'message'),
-    payloads = [
-        { topic: 'topic-test', messages: 'hi', partition: 0 },
-        { topic: 'topic-test', messages: ['hello', 'world', km] }
-    ];
+    client = new kafka.KafkaClient({ kafkaHost: '127.0.0.1:9092' }),
+    producer = new Producer(client);
 
-producer.on('ready', function () {
-    producer.send(payloads, function (err, data) {
-        console.log(data);
-    });
+let count = 0;
+
+producer.on("ready", function () {
+    console.log("ready");
+    setInterval(function () {
+        payloads = [
+            { topic: "cat", messages: `I have ${count} cats`, partition: 0 }
+        ];
+
+        producer.send(payloads, function (err, data) {
+            console.log(data);
+            count += 1;
+        });
+        console.log(payloads);
+    }, 5000);
 });
 
-producer.on('error', function (err) {
+producer.on("error", function (err) {
     console.log(err);
-})
+});
