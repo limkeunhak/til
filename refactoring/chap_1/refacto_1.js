@@ -18,19 +18,11 @@ function statement(invoice, plays) {
     }
     
     function totalAmountFor(invoice) {
-        let totalAmount = 0;
-        for (let perf of invoice.performances) {
-            totalAmount += amountFor(perf);
-        }
-        return totalAmount;
+        return invoice.performances.reduce((acc, perf) => amountFor(perf) + acc, 0);
     }
     
     function totalVolumeCredits(invoice) {
-        let volumeCredits = 0;
-        for (let perf of invoice.performances) {
-            volumeCredits += volumeCreditsFor(perf);
-        }
-        return volumeCredits;
+        return invoice.performances.reduce((acc, perf) => acc + volumeCreditsFor(perf), 0);
     }
     
     function volumeCreditsFor(perf) {
