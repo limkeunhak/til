@@ -1,7 +1,7 @@
-const statement = require('../refacto_1/refacto_1');
+const statement = require('../refacto_2/refacto_2');
 const assert = require("assert"); 
 
-describe('Refactoring 1', function () {
+describe('Refactoring 2', function () {
     beforeEach(function() {
         this.invoices = [
             {
