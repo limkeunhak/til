@@ -56,7 +56,7 @@ function createStatementData(invoice, plays) {
     }
     
     function totalAmountFor(invoice) {
-        return invoice.performances.reduce((acc, perf) => amountFor(perf) + acc, 0);
+        return invoice.performances.reduce((acc, perf) => perf.amount + acc, 0);
     }
     
     function totalVolumeCredits(invoice) {

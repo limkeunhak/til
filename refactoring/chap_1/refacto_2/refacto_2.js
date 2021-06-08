@@ -1,3 +1,10 @@
+class PerformanceCalculator {
+    constructor(perf, play) {
+        this.perf = perf;
+        this.play = play;
+    }
+}
+
 function statement(invoice, plays) {
     return renderPlainText(createStatementData(invoice));
 
@@ -18,7 +25,7 @@ function statement(invoice, plays) {
     }
     
     function totalAmountFor(invoice) {
-        return invoice.performances.reduce((acc, perf) => amountFor(perf) + acc, 0);
+        return invoice.performances.reduce((acc, perf) => perf.amount + acc, 0);
     }
     
     function totalVolumeCredits(invoice) {
